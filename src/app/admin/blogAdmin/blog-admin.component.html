@@ -1,0 +1,83 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/']">My Blog</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a (click)="chooseMode('add')">Add Post</a></li>
+      <li *ngIf="menuChoice"><a (click)="chooseMode('')">Manage Blogs</a></li>
+      <li><a [routerLink]="['/admin']">Back to Admin</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="theUser">
+      <li><a><span class="glyphicon glyphicon-users"></span>Hoş geldin {{theUser}}!</a></li>
+      <li><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div [ngSwitch]="menuChoice">
+  <div *ngSwitchCase="'add'">
+    <add-menu></add-menu>
+  </div>
+  <div *ngSwitchDefault>
+    <div *ngIf="!formDisplay">
+      <div class="container" *ngIf="blogPosts">
+        <div class="rows">
+          <div class="well" *ngFor="let post of blogPosts">
+            <div class="media">
+              <a class="pull-left" href="#">
+    		<img class="media-object mini-image" [src]="post.img">
+  		</a>
+              <div class="media-body">
+                <h4 class="media-heading">{{post.title}}</h4>
+                <p class="text-right">By Francisco</p>
+                <p>{{post.content}}</p>
+                <ul class="list-inline list-unstyled">
+                  <li><span><i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours </span></li>
+                  <li>|</li>
+                  <span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
+                  <li>|</li>
+                  <li>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  </li>
+                  <li>|</li>
+                  <li>
+                    <a class="btn btn-sm btn-success" (click)="deletePost(post)">Delete</a>
+                    <a class="btn btn-sm btn-warning" (click)="editPost(post)">Edit</a>
+                    <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+                    <span><i class="fa fa-facebook-square"></i></span>
+                    <span><i class="fa fa-twitter-square"></i></span>
+                    <span><i class="fa fa-google-plus-square"></i></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formDisplay">
+      <div class="container">
+
+        <form>
+          <h2 class="form-signin-heading">Edit Post</h2>
+          <input type="text" class="form-control" [(ngModel)]="singlePost.title" name="editTitle" required #psTitle="ngModel">
+          <br />
+          <textarea rows="15" id="content" [(ngModel)]="singlePost.content" class="form-control" name="editContent" required #psContent="ngModel">
+        </textarea>
+          <br />
+          <img [src]="singlePost.img">
+          <br />
+          <button class="btn btn-success form-contol" [disabled]="!psTitle.valid || !psContent.valid" (click)="updatePost(singlePost)">
+         Update Post
+    </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="!loading" class="loader"></div>

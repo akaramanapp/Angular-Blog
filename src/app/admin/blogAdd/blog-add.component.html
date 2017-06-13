@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="rows">
+  <form>
+    <h2 class="form-signin-heading">New Post</h2>
+    <input type="text" class="form-control" [(ngModel)]="postTitle" name="postTitle" required #psTitle="ngModel">
+      <br />
+    <textarea rows="15" id="content" [(ngModel)]="content"  class="form-control" placeholder="content" type="content" name="content" required #psContent="ngModel">
+
+    </textarea>
+    <br />
+    <input type="file" (change)="fileLoad($event)">
+    <img *ngIf="imageSRC" [src]="imageSRC"><br />
+    <button class="btn tbn-success" type="button" [disabled]="!psTitle.valid || !psContent.valid" 
+    (click)="createPost()">
+         Create Post
+    </button>
+  </form>
+</div>
+</div>
+
+

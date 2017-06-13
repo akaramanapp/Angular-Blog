@@ -1,0 +1,19 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" (click)="homepage()">My Blog</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a>Home</a></li>
+      <li><a [routerLink]="['/admin/blog-admin']">Manage Blog</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right"  *ngIf="theUser">
+      <li><a><span class="glyphicon glyphicon-users"></span>Hoş geldin {{theUser}}!</a></li>
+      <li><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Welcome to the Admin Area.</h1>
+</div>

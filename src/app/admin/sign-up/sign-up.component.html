@@ -1,0 +1,20 @@
+
+<div class="wrapper">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Register an Account</h2>
+    <input class="form-control" placeholder="Email Address" required="" autofocus="" type="text" name="email" id="email" [(ngModel)]="email"
+      required #em="ngModel" />
+      <br />
+    <input class="form-control" placeholder="Password1" required="" type="password" name="password1" id="password1" [(ngModel)]="password1"
+      required #pwd1="ngModel" />
+            <br />
+    <input class="form-control" placeholder="Password2" required="" type="password" name="password2" id="password2" [(ngModel)]="password2"
+      required #pwd2="ngModel" />
+      <div *ngIf="passwordFail" class="alert callout">
+      Password Do Not Match
+      </div>
+      <br />
+    <button class="btn btn-lg btn-success btn-block" (click)="signUp()">Sign-Up</button>
+    <button class="btn btn-lg btn-danger btn-block" [routerLink]="['/']">Cancel</button>
+  </form>
+</div>

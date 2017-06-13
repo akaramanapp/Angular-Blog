@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Please login</h2>
+    <input class="form-control" placeholder="Email Address" required="" autofocus="" type="text" name="email" id="email" [(ngModel)]="email"
+      required #em="ngModel" />
+    <br />
+    <input class="form-control" placeholder="Password" required="" type="password" name="password1" id="password1" [(ngModel)]="password1"
+      required #pwd1="ngModel" />
+      <br />
+    <button class="btn btn-lg btn-primary btn-block" (click)="login()">Login</button>
+    <button class="btn btn-lg btn-success btn-block" (click)="signup()">Sign-Up</button>
+  </form>
+</div>
